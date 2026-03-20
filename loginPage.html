@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background:
+        radial-gradient(circle at top left, rgba(120, 119, 198, 0.35), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(0, 191, 255, 0.25), transparent 35%),
+        linear-gradient(135deg, #0f172a, #111827, #1e293b);
+      color: #fff;
+      padding: 20px;
+    }
+
+    .login-wrapper {
+      width: 100%;
+      max-width: 980px;
+      min-height: 580px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-radius: 28px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    .left-panel {
+      padding: 60px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    }
+
+    .brand {
+      display: inline-block;
+      margin-bottom: 24px;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #93c5fd;
+    }
+
+    .left-panel h1 {
+      font-size: 42px;
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    .left-panel p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.75);
+      max-width: 420px;
+    }
+
+    .feature-list {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .feature-item {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .right-panel {
+      padding: 60px 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(10, 15, 30, 0.45);
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .login-card h2 {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .login-card .subtext {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.65);
+      margin-bottom: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 15px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.07);
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      transition: 0.25s ease;
+    }
+
+    .form-group input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .form-group input:focus {
+      border-color: #60a5fa;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.18);
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+      font-size: 14px;
+    }
+
+    .row label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+    }
+
+    .row a {
+      color: #93c5fd;
+      text-decoration: none;
+    }
+
+    .row a:hover {
+      text-decoration: underline;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #3b82f6, #06b6d4);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 26px rgba(6, 182, 212, 0.25);
+    }
+
+    .divider {
+      text-align: center;
+      margin: 24px 0 18px;
+      color: rgba(255, 255, 255, 0.45);
+      font-size: 13px;
+      position: relative;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 38%;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .divider::before {
+      left: 0;
+    }
+
+    .divider::after {
+      right: 0;
+    }
+
+    .social-login {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .social-btn {
+      padding: 13px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    .social-btn:hover {
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .signup {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .signup a {
+      color: #93c5fd;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .signup a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 860px) {
+      .login-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .left-panel {
+        display: none;
+      }
+
+      .right-panel {
+        padding: 40px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-wrapper">
+    <div class="left-panel">
+      <span class="brand">Your Brand</span>
+      <h1>Welcome back to your workspace.</h1>
+      <p>
+        Sign in to manage your tasks, view your projects, and keep everything
+        organized in one secure place.
+      </p>
+
+      <div class="feature-list">
+        <div class="feature-item">✔ Secure access to your dashboard</div>
+        <div class="feature-item">✔ Fast and responsive modern UI</div>
+        <div class="feature-item">✔ Easy to customize for your own website</div>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="login-card">
+        <h2>Sign In</h2>
+        <p class="subtext">Please enter your details to continue</p>
+
+        <form action="">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username">
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
+          </div>
+
+          <div class="row">
+            <label>
+              <input type="checkbox">
+              Remember me
+            </label>
+            <a href="#">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="login-btn">Login</button>
+
+          <div class="divider">or continue with</div>
+
+          <div class="social-login">
+            <button type="button" class="social-btn">Google</button>
+            <button type="button" class="social-btn">GitHub</button>
+          </div>
+
+          <div class="signup">
+            Don’t have an account? <a href="#">Create one</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
